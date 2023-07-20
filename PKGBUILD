@@ -5,7 +5,7 @@ makedepends=('rust' 'cargo')
 arch=('any')
 
 build() {
-    cargo build --frozen --release
+    cargo build --release
 }
 
 package() {
