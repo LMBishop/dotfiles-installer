@@ -5,4 +5,7 @@ use clap::Parser;
 pub struct Args {
     #[arg(short, long)]
     pub file: String,
+
+    #[arg(short, long, default_value_t = true)]
+    pub dry_run: bool,
 }

@@ -12,6 +12,7 @@ use util::*;
 fn main() {
     let args = cli::Args::parse();
     let install_profile = &args.file;
+    let dry_run = &args.dry_run;
 
     let loaded_config: Config = Config::from_file(install_profile).unwrap_or_else(|err| {
         eprintln!("Cannot load '{install_profile}': {}", err.to_string());
@@ -26,6 +27,11 @@ fn main() {
 
         println!("{} {}", count.bold(), name.bold());
         for step in stage.steps.as_ref().unwrap() {
+            if *dry_run {
+                println!("{}", fmt_step(step, &Ok(false)));
+                continue;
+            }
+
             let step_result = install::run_step(&step, &stage.base_path);
 
             println!("{}", fmt_step(step, &step_result));

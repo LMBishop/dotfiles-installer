@@ -7,7 +7,7 @@ pub const EXIT_INSTALL_FAILED: i32 = 2;
 // todo: figure out a better way of doing this
 pub fn str_step(step: &Step) -> String {
     match step {
-        Step::Link(path) => format!("Link {} to {}", &path.from, &path.to),
+        Step::Link(path) => format!("Link {} to {} (symbolic: {})", &path.from, &path.to, &path.symbolic.unwrap_or(false)),
         Step::Copy(path) => format!("Copy {} to {}", &path.from, &path.to),
         Step::Shell(command) => format!("Run {}", command),
     }

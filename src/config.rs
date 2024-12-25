@@ -8,12 +8,19 @@ use serde::{Serialize, Deserialize};
 pub struct CopyPath {
     pub from: String,
     pub to: String,
-    pub recursive: bool,
+    pub recursive: Option<bool>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Link {
+    pub from: String,
+    pub to: String,
+    pub symbolic: Option<bool>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum Step {
-    Link(CopyPath),
+    Link(Link),
     Copy(CopyPath),
     Shell(String),
 }
